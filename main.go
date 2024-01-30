@@ -1,22 +1,39 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
+// Response is a struct to represent the JSON response
+type Response struct {
+	Message string `json:"message"`
+}
+
 func main() {
+	// Create a new router using gorilla/mux
+	router := mux.NewRouter()
+
 	// Define a handler function for the API endpoint
 	apiHandler := func(w http.ResponseWriter, r *http.Request) {
 		// Set the content type to JSON
 		w.Header().Set("Content-Type", "application/json")
 
-		// Send a JSON response
-		fmt.Fprintf(w, `{"message": "Hello, this is a simple GET API!"}`)
+		// Create a Response struct
+		response := Response{Message: "Hello, this is a simple GET API!"}
+
+		// Encode the Response struct to JSON and write it to the response writer
+		json.NewEncoder(w).Encode(response)
 	}
 
-	// Register the API handler function for a specific route
-	http.HandleFunc("/api", apiHandler)
+	// Register the API handler function for the "/api" route using gorilla/mux
+	router.HandleFunc("/api", apiHandler).Methods("GET")
+
+	// Attach the router to the default serve mux
+	http.Handle("/", router)
 
 	// Start the server on port 8080
 	fmt.Println("Server is running on http://localhost:8080")
