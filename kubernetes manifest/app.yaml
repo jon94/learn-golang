@@ -15,6 +15,7 @@ spec:
   template:
     metadata:
       labels:
+        admission.datadoghq.com/enabled: "true"      
         app: golang-app
         tags.datadoghq.com/env: learn-golang
         tags.datadoghq.com/service: golang-app
