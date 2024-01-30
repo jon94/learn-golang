@@ -28,6 +28,10 @@ func main() {
 
 	// Define a handler function for the API endpoint
 	apiHandler := func(w http.ResponseWriter, r *http.Request) {
+		// Start a trace span for this handler
+		span, ctx := tracer.StartSpanFromContext(r.Context(), "apiHandler")
+		defer span.Finish()
+
 		// Set the content type to JSON
 		w.Header().Set("Content-Type", "application/json")
 
