@@ -6,10 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	//"github.com/gorilla/mux"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-
 	muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 // Response is a struct to represent the JSON response
@@ -18,9 +17,12 @@ type Response struct {
 }
 
 func main() {
+	// Initialize Datadog tracer
+	tracer.Start(
+		tracer.WithServiceName("your-service-name"),
+		tracer.WithAgentAddr("localhost:8126"), // Use the actual address of your Datadog Agent
+	)
 
-	//init dd tracer
-	tracer.Start()
 	defer tracer.Stop()
 
 	// Create a new router using gorilla/mux
@@ -29,8 +31,13 @@ func main() {
 	// Define a handler function for the API endpoint
 	apiHandler := func(w http.ResponseWriter, r *http.Request) {
 		// Start a trace span for this handler
-		span, ctx := tracer.StartSpanFromContext(r.Context(), "apiHandler")
+		span := tracer.StartSpan("apiHandler")
 		defer span.Finish()
+
+		// Set span tags if needed
+		span.SetTag(ext.SpanType, ext.SpanTypeWeb)
+		span.SetTag(ext.HTTPMethod, r.Method)
+		span.SetTag(ext.HTTPURL, r.URL.Path)
 
 		// Set the content type to JSON
 		w.Header().Set("Content-Type", "application/json")
