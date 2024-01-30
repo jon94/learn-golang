@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	//"github.com/gorilla/mux"
+
+	muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
 )
 
 // Response is a struct to represent the JSON response
@@ -15,7 +17,7 @@ type Response struct {
 
 func main() {
 	// Create a new router using gorilla/mux
-	router := mux.NewRouter()
+	router := muxtrace.NewRouter()
 
 	// Define a handler function for the API endpoint
 	apiHandler := func(w http.ResponseWriter, r *http.Request) {
