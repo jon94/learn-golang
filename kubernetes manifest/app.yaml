@@ -16,6 +16,7 @@ spec:
       containers:
       - name: golang-app
         image: jonlimpw/learn-golang:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
 ---
