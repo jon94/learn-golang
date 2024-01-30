@@ -32,6 +32,7 @@ func main() {
 
 		// Create a Response struct
 		response := Response{Message: "Hello, this is a simple GET API!"}
+		fmt.Println("Simple get API Success!!")
 
 		// Encode the Response struct to JSON and write it to the response writer
 		json.NewEncoder(w).Encode(response)
