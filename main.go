@@ -18,10 +18,7 @@ type Response struct {
 
 func main() {
 	// Initialize Datadog tracer
-	tracer.Start(
-		tracer.WithServiceName("your-service-name"),
-		tracer.WithAgentAddr("localhost:8126"), // Use the actual address of your Datadog Agent
-	)
+	tracer.Start()
 
 	defer tracer.Stop()
 
