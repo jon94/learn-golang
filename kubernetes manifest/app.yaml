@@ -1,6 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    tags.datadoghq.com/env: learn-golang
+    tags.datadoghq.com/service: golang-app
+    tags.datadoghq.com/version: 1.0.0
   name: golang-app
   namespace: learn-golang
 spec:
@@ -12,6 +16,9 @@ spec:
     metadata:
       labels:
         app: golang-app
+        tags.datadoghq.com/env: learn-golang
+        tags.datadoghq.com/service: golang-app
+        tags.datadoghq.com/version: 1.0.0
     spec:
       containers:
       - name: golang-app
@@ -19,6 +26,7 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+
 ---
 apiVersion: v1
 kind: Service
