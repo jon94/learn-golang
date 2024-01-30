@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	//"github.com/gorilla/mux"
@@ -32,7 +33,7 @@ func main() {
 
 		// Create a Response struct
 		response := Response{Message: "Hello, this is a simple GET API!"}
-		fmt.Println("Simple get API Success!!")
+		log.Println("Simple get API Success!!")
 
 		// Encode the Response struct to JSON and write it to the response writer
 		json.NewEncoder(w).Encode(response)
@@ -48,6 +49,6 @@ func main() {
 	fmt.Println("Server is running on http://localhost:8080")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
-		fmt.Println("Error:", err)
+		log.Println("Error:", err)
 	}
 }
