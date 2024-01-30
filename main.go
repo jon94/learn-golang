@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	//"github.com/gorilla/mux"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 	muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
 )
@@ -16,6 +17,11 @@ type Response struct {
 }
 
 func main() {
+
+	//init dd tracer
+	tracer.Start()
+	defer tracer.Stop()
+
 	// Create a new router using gorilla/mux
 	router := muxtrace.NewRouter()
 

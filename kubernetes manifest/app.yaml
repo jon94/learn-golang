@@ -25,6 +25,9 @@ spec:
       - name: golang-app
         image: jonlimpw/learn-golang:latest
         imagePullPolicy: Always
+        env:
+          - name: DD_TRACE_DEBUG
+            value: "true"
         ports:
         - containerPort: 8080
 
