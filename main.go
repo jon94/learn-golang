@@ -29,9 +29,9 @@ type Response struct {
 
 func main() {
 	// obtain DD_AGENT_HOST
-	// ddagenthost := "DD_AGENT_HOST"
-	// ddagenthostvalue := os.Getenv(ddagenthost)
-	// os.Setenv("DD_AGENT_HOST", ddagenthostvalue)
+	ddagenthost := "DD_AGENT_HOST"
+	ddagenthostvalue := os.Getenv(ddagenthost)
+	os.Setenv("DD_AGENT_HOST", ddagenthostvalue)
 	// source code integration
 	ddgiturl := "DD_GIT_REPOSITORY_URL"
 	ddgiturlvalue := os.Getenv(ddgiturl)
