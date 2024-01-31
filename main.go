@@ -21,6 +21,10 @@ func main() {
 	ddagenthost := "DD_AGENT_HOST"
 	ddagenthostvalue := os.Getenv(ddagenthost)
 	os.Setenv("DD_AGENT_HOST", ddagenthostvalue)
+	// source code integration
+	ddtags := "DD_TAGS"
+	ddtagsvalue := os.Getenv(ddtags)
+	os.Setenv("DD_TAGS", ddtagsvalue)
 
 	// Initialize Datadog tracer
 	tracer.Start()
