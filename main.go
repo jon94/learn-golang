@@ -36,8 +36,8 @@ func main() {
 	// Define a handler function for the API endpoint
 	apiHandler := func(w http.ResponseWriter, r *http.Request) {
 		// Start a trace span for this handler
-		span := tracer.StartSpan("apiHandler")                                                                             // this results in disconnected spans
-		span, ctx := tracer.StartSpanFromContext(context.Background(), "apiHandler", tracer.ResourceName("/simplegetapi")) //this results in connected span due to ctx
+		// span := tracer.StartSpan("apiHandler")  // this results in disconnected spans
+		span, _ := tracer.StartSpanFromContext(context.Background(), "apiHandler", tracer.ResourceName("/simplegetapi")) //this results in connected span due to ctx
 		defer span.Finish()
 
 		// Set span tags if needed
