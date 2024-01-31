@@ -41,7 +41,7 @@ func main() {
 	os.Setenv("DD_GIT_COMMIT_SHA", ddgitshavalue)
 
 	// Initialize Datadog tracer
-	tracer.Start()
+	tracer.Start(tracer.WithRuntimeMetrics())
 	defer tracer.Stop()
 
 	// Create a new router using gorilla/mux
