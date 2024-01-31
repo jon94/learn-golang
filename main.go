@@ -23,6 +23,7 @@ func main() {
 	ddagenthostvalue := os.Getenv(ddagenthost)
 	ddagenthostvalueWithPort := ddagenthostvalue + ":8126"
 	os.Setenv("DD_TRACE_AGENT_URL", ddagenthostvalueWithPort)
+	log.Println(ddagenthostvalueWithPort)
 
 	// Initialize Datadog tracer
 	tracer.Start()
