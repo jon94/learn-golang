@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"runtime/debug"
 
 	muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
@@ -80,6 +81,7 @@ func main() {
 
 		// Log the error message
 		log.Printf("Error Request API triggered with message: %s\n", customError.Message)
+		debug.PrintStack() // Capture and print the stack trace
 
 		// Encode the custom error message to JSON and write it to the response writer
 		json.NewEncoder(w).Encode(Response{Message: customError.Message})
