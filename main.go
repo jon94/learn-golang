@@ -11,6 +11,16 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
+// CustomError is a custom error type
+type CustomError struct {
+	Message string
+}
+
+// Error implements the error interface for CustomError
+func (e *CustomError) Error() string {
+	return e.Message
+}
+
 // Response is a struct to represent the JSON response
 type Response struct {
 	Message string `json:"message"`
@@ -64,15 +74,15 @@ func main() {
 		// Set the content type to JSON
 		w.Header().Set("Content-Type", "application/json")
 
-		// Return an HTTP 500 error
+		// Return a custom error
+		customError := &CustomError{Message: "Custom Error: Something went wrong"}
 		w.WriteHeader(http.StatusInternalServerError)
 
-		// Create a Response struct with an error message
-		response := Response{Message: "Error: Internal Server Error"}
-		log.Println("Error Request API triggered!!")
+		// Log the error message
+		log.Printf("Error Request API triggered with message: %s\n", customError.Message)
 
-		// Encode the Response struct to JSON and write it to the response writer
-		json.NewEncoder(w).Encode(response)
+		// Encode the custom error message to JSON and write it to the response writer
+		json.NewEncoder(w).Encode(Response{Message: customError.Message})
 	}
 
 	// Register the API handler function for the "/api" route using gorilla/mux
