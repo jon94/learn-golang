@@ -4,7 +4,13 @@ FROM golang:1.21.5
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the local code into the container at the working directory
+# Copy go.mod and go.sum files to the working directory
+COPY go.mod go.sum ./
+
+# Download dependencies
+RUN go mod download
+
+# Copy the entire application
 COPY . .
 
 # Build the Go application
