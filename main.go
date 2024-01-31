@@ -32,6 +32,10 @@ func main() {
 	ddagenthost := "DD_AGENT_HOST"
 	ddagenthostvalue := os.Getenv(ddagenthost)
 	os.Setenv("DD_AGENT_HOST", ddagenthostvalue)
+	// obtain dogstatsdport
+	dogstatsd := "DD_DOGSTATSD_PORT"
+	dogstatsdport := os.Getenv(dogstatsd)
+	os.Setenv("DD_DOGSTATSD_PORT", dogstatsdport)
 	// source code integration
 	ddgiturl := "DD_GIT_REPOSITORY_URL"
 	ddgiturlvalue := os.Getenv(ddgiturl)

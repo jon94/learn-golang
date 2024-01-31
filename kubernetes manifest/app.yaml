@@ -28,6 +28,8 @@ spec:
         env:
         - name: DD_TRACE_DEBUG
           value: "true"
+        - name: DD_DOGSTATSD_PORT
+          value: "8125"         
         - name: DD_AGENT_HOST
           valueFrom:
             fieldRef:
