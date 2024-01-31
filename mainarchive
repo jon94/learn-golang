@@ -32,8 +32,11 @@ func main() {
 	// Define a handler function for the API endpoint
 	apiHandler := func(w http.ResponseWriter, r *http.Request) {
 		// Start a trace span for this handler
+		// span := tracer.StartSpan("apiHandler")  // this results in disconnected spans
+		// for connected spans
 		ctx := r.Context()
 		span, ctx := tracer.StartSpanFromContext(ctx, "apiHandler", tracer.ResourceName("/simplegetapi"))
+
 		defer span.Finish()
 
 		// Set the content type to JSON
@@ -47,32 +50,8 @@ func main() {
 		json.NewEncoder(w).Encode(response)
 	}
 
-	// Define a handler function for the /getErrorRequest endpoint
-	getErrorRequestHandler := func(w http.ResponseWriter, r *http.Request) {
-		// Start a trace span for this handler
-		ctx := r.Context()
-		span, ctx := tracer.StartSpanFromContext(ctx, "getErrorRequestHandler", tracer.ResourceName("/getErrorRequest"))
-		defer span.Finish()
-
-		// Set the content type to JSON
-		w.Header().Set("Content-Type", "application/json")
-
-		// Return an HTTP 500 error
-		w.WriteHeader(http.StatusInternalServerError)
-
-		// Create a Response struct with an error message
-		response := Response{Message: "Error: Internal Server Error"}
-		log.Println("Error Request API triggered!!")
-
-		// Encode the Response struct to JSON and write it to the response writer
-		json.NewEncoder(w).Encode(response)
-	}
-
 	// Register the API handler function for the "/api" route using gorilla/mux
 	router.HandleFunc("/api", apiHandler).Methods("GET")
-
-	// Register the handler function for the "/getErrorRequest" route
-	router.HandleFunc("/getErrorRequest", getErrorRequestHandler).Methods("GET")
 
 	// Attach the router to the default serve mux
 	http.Handle("/", router)
