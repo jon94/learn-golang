@@ -23,7 +23,7 @@ func main() {
 	ddagenthostvalue := os.Getenv(ddagenthost)
 
 	// Initialize Datadog tracer
-	tracer.Start(tracer.WithAgentAddr(ddagenthostvalue))
+	tracer.Start(tracer.WithAgentAddr(ddagenthostvalue:8126))
 	defer tracer.Stop()
 
 	// Create a new router using gorilla/mux
