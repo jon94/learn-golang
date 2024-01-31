@@ -4,7 +4,7 @@ metadata:
   labels:
     tags.datadoghq.com/env: learn-golang
     tags.datadoghq.com/service: golang-app
-    tags.datadoghq.com/version: 1.0.0
+    tags.datadoghq.com/version: 2.0.1
   name: golang-app
   namespace: learn-golang
 spec:
@@ -19,7 +19,7 @@ spec:
         app: golang-app
         tags.datadoghq.com/env: learn-golang
         tags.datadoghq.com/service: golang-app
-        tags.datadoghq.com/version: 1.0.0
+        tags.datadoghq.com/version: 2.0.1
     spec:
       containers:
       - name: golang-app
