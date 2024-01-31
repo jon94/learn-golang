@@ -26,7 +26,7 @@ jobs:
       with:
         image: ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}
         registry: docker.io
-        tag: latest  
+        tag: 2.0.0  
         buildArgs: 'DD_GIT_REPOSITORY_URL=github.com/jon94/learn-golang,DD_GIT_COMMIT_SHA=$(git rev-parse HEAD)'
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
