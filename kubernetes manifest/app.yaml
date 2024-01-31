@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: golang-app
-        image: jonlimpw/learn-golang:var3
+        image: jonlimpw/learn-golang:latest
         imagePullPolicy: Always
         env:
         - name: DD_TRACE_DEBUG
