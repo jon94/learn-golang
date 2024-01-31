@@ -21,12 +21,12 @@ func main() {
 	// obtain DD_AGENT_HOST
 	ddagenthost := "DD_AGENT_HOST"
 	ddagenthostvalue := os.Getenv(ddagenthost)
-	ddagenthostvalueWithPort := ddagenthostvalue + ":8126"
+	// ddagenthostvalueWithPort := ddagenthostvalue + ":8126"
 	os.Setenv("DD_AGENT_HOST", ddagenthostvalue)
-	log.Println(ddagenthostvalueWithPort)
+	// log.Println(ddagenthostvalueWithPort)
 
 	// Initialize Datadog tracer
-	tracer.Start(tracer.WithAgentAddr(ddagenthostvalueWithPort))
+	tracer.Start(tracer.WithAgentAddr(ddagenthostvalue))
 	defer tracer.Stop()
 
 	// Create a new router using gorilla/mux
