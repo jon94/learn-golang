@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -37,7 +36,10 @@ func main() {
 	apiHandler := func(w http.ResponseWriter, r *http.Request) {
 		// Start a trace span for this handler
 		// span := tracer.StartSpan("apiHandler")  // this results in disconnected spans
-		span, _ := tracer.StartSpanFromContext(context.Background(), "apiHandler", tracer.ResourceName("/simplegetapi")) //this results in connected span due to ctx
+		// for connected spans
+		ctx := r.Context()
+		span, ctx := tracer.StartSpanFromContext(ctx, "apiHandler", tracer.ResourceName("/simplegetapi"))
+
 		defer span.Finish()
 
 		// Set span tags if needed
