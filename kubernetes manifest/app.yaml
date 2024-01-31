@@ -27,7 +27,11 @@ spec:
         imagePullPolicy: Always
         env:
         - name: DD_TRACE_DEBUG
-          value: "true"              
+          value: "true"
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP                
         ports:
         - containerPort: 8080
 

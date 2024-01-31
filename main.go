@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
@@ -17,9 +18,12 @@ type Response struct {
 }
 
 func main() {
-	// Initialize Datadog tracer
-	tracer.Start()
+	// obtain DD_AGENT_HOST
+	ddagenthost := "DD_AGENT_HOST"
+	ddagenthostvalue := os.Getenv(ddagenthost)
 
+	// Initialize Datadog tracer
+	tracer.Start(tracer.WithAgentAddr(ddagenthostvalue))
 	defer tracer.Stop()
 
 	// Create a new router using gorilla/mux
