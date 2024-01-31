@@ -26,7 +26,7 @@ func main() {
 	log.Println(ddagenthostvalueWithPort)
 
 	// Initialize Datadog tracer
-	tracer.Start()
+	tracer.Start(tracer.WithAgentAddr(ddagenthostvalueWithPort))
 	defer tracer.Stop()
 
 	// Create a new router using gorilla/mux
