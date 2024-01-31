@@ -8,7 +8,6 @@ import (
 	"os"
 
 	muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
-	// "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
@@ -21,9 +20,7 @@ func main() {
 	// obtain DD_AGENT_HOST
 	ddagenthost := "DD_AGENT_HOST"
 	ddagenthostvalue := os.Getenv(ddagenthost)
-	// ddagenthostvalueWithPort := ddagenthostvalue + ":8126"
 	os.Setenv("DD_AGENT_HOST", ddagenthostvalue)
-	// log.Println(ddagenthostvalueWithPort)
 
 	// Initialize Datadog tracer
 	tracer.Start()
@@ -41,11 +38,6 @@ func main() {
 		span, ctx := tracer.StartSpanFromContext(ctx, "apiHandler", tracer.ResourceName("/simplegetapi"))
 
 		defer span.Finish()
-
-		// Set span tags if needed
-		// span.SetTag(ext.SpanType, ext.SpanTypeWeb)
-		// span.SetTag(ext.HTTPMethod, r.Method)
-		// span.SetTag(ext.HTTPURL, r.URL.Path)
 
 		// Set the content type to JSON
 		w.Header().Set("Content-Type", "application/json")
