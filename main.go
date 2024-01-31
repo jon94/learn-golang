@@ -22,9 +22,12 @@ func main() {
 	ddagenthostvalue := os.Getenv(ddagenthost)
 	os.Setenv("DD_AGENT_HOST", ddagenthostvalue)
 	// source code integration
-	ddtags := "DD_TAGS"
-	ddtagsvalue := os.Getenv(ddtags)
-	os.Setenv("DD_TAGS", ddtagsvalue)
+	ddgiturl := "DD_GIT_REPOSITORY_URL"
+	ddgiturlvalue := os.Getenv(ddgiturl)
+	os.Setenv("DD_GIT_REPOSITORY_URL", ddgiturlvalue)
+	ddgitsha := "DD_GIT_COMMIT_SHA"
+	ddgitshavalue := os.Getenv(ddgitsha)
+	os.Setenv("DD_GIT_COMMIT_SHA", ddgitshavalue)
 
 	// Initialize Datadog tracer
 	tracer.Start()
