@@ -8,7 +8,7 @@ import (
 	"os"
 
 	muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+	// "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
@@ -43,9 +43,9 @@ func main() {
 		defer span.Finish()
 
 		// Set span tags if needed
-		span.SetTag(ext.SpanType, ext.SpanTypeWeb)
-		span.SetTag(ext.HTTPMethod, r.Method)
-		span.SetTag(ext.HTTPURL, r.URL.Path)
+		// span.SetTag(ext.SpanType, ext.SpanTypeWeb)
+		// span.SetTag(ext.HTTPMethod, r.Method)
+		// span.SetTag(ext.HTTPURL, r.URL.Path)
 
 		// Set the content type to JSON
 		w.Header().Set("Content-Type", "application/json")
