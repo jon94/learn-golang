@@ -1,4 +1,4 @@
-module learn-golang/simpleapi
+module github.com/jon94/learn-golang
 
 go 1.21.5
 

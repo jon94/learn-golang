@@ -76,7 +76,7 @@ func main() {
 	router.HandleFunc("/api", apiHandler).Methods("GET")
 
 	// Register the handler function for the "/getErrorRequest" route
-	router.HandleFunc("/getErrorRequest", getErrorRequestHandler).Methods("GET")
+	router.HandleFunc("/api/getErrorRequest", getErrorRequestHandler).Methods("GET")
 
 	// Attach the router to the default serve mux
 	http.Handle("/", router)
