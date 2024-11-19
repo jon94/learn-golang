@@ -6,7 +6,7 @@ metadata:
     tags.datadoghq.com/service: golang-app
     tags.datadoghq.com/version: 2.0.1
   name: golang-app
-  namespace: learn-golang
+  namespace: argoapptest
 spec:
   replicas: 1
   selector:
