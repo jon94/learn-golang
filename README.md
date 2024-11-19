@@ -9,4 +9,3 @@ Datadog Agent configuration required.
     port: 8125
     useHostPort: true
     nonLocalTraffic: true
-
